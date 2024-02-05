@@ -20,10 +20,12 @@ model Customer{
 
 
 //definicion de factura
-model Billing{
+model Bill{
   id Int    @id @default(autoincrement())
   date  DateTime
   pay   Float
+  nameProduct String
+  product Product @relation(fields: [id], references: [id])
 }
 
 
@@ -34,14 +36,7 @@ model  Product {
   description String
   price       Float
   amountn       Int
-}
-
-
-//totales
-model  Total {
-  customerId   Int     
-  billId      Int     @unique
-  totalAmount Float
+  bill Bill[]
 }
 
 
